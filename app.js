@@ -68,7 +68,7 @@ startGameBtn.addEventListener("click", () => {
   if (winner === RESULT_DRAW) {
     message += "had a draw.";
   } else if (winner === RESULT_PLAYER_WINS) {
-    message += "WIN"; 
+    message += "WIN";
   } else {
     message += "LOST";
   }
