@@ -4,6 +4,9 @@ const ROCK = "ROCK";
 const PAPER = "PAPER";
 const SCISSORS = "SCISSORS";
 const DEFAULT_USER_CHOICE = ROCK;
+const RESULT_DRAW = "it's a DRAW";
+const RESULT_PLAYER_WINS = "You WIN";
+const RESULT_COMPUTER_WINS = "You LOST";
 
 let gameIsRunning = false;
 
@@ -19,11 +22,39 @@ const getPlayerChoice = function () {
   return selection;
 };
 
+const getComputerChoice = function () {
+  const randomVal = Math.random();
+  if (randomVal < 0.34) {
+    return ROCK;
+  } else if (randomVal < 0.67) {
+    return PAPER;
+  } else {
+    return SCISSORS;
+  }
+};
+
+const getWinner = function (cChoice, pChoice) {
+  if (cChoice === pChoice) {
+    return RESULT_DRAW;
+  } else if (
+    (cChoice === ROCK && pChoice === PAPER) ||
+    (cChoice === PAPER && pChoice === SCISSORS) ||
+    (cChoice === SCISSORS && pChoice === ROCK)
+  ) {
+    return RESULT_PLAYER_WINS;
+  } else {
+    return RESULT_COMPUTER_WINS;
+  }
+};
+
 startGameBtn.addEventListener("click", function () {
-    if (gameIsRunning){
-        return
-    }
+  if (gameIsRunning) {
+    return;
+  }
+  gameIsRunning = true;
   console.log("the game begins in anonymous function");
   const playerSelection = getPlayerChoice();
-  console.log(playerSelection);
+  const computerChoice = getComputerChoice();
+  const winner = getWinner(computerChoice, playerSelection);
+  console.log(playerSelection, computerChoice, winner);
 });
